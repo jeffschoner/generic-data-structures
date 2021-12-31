@@ -2,6 +2,8 @@ package linkedlist
 
 import (
 	"errors"
+
+	"github.com/jeffschoner/generic-data-structures/collection"
 )
 
 type List[T any] struct {
@@ -11,6 +13,10 @@ type List[T any] struct {
 
 func New[T any]() *List[T] {
 	return &List[T]{}
+}
+
+func NewCollection[T any]() collection.Collection[T] {
+	return New[T]()
 }
 
 var EmptyError = errors.New("List is empty")
@@ -31,6 +37,10 @@ func (l *List[T]) Append(item T) {
 		}
 		l.Tail = l.Tail.Next
 	}
+}
+
+func (l *List[T]) Add(item T) {
+	l.Append(item)
 }
 
 func (l *List[T]) Prepend(item T) {

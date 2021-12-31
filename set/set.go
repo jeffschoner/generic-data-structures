@@ -1,5 +1,9 @@
 package set
 
+import (
+	"github.com/jeffschoner/generic-data-structures/collection"
+)
+
 type Set[T comparable] struct {
 	storage map[T]struct{}
 }
@@ -10,6 +14,10 @@ func New[T comparable]() Set[T] {
 	return Set[T]{
 		storage: make(map[T]struct{}),
 	}
+}
+
+func NewCollection[T comparable]() collection.Collection[T] {
+	return New[T]()
 }
 
 // Add an item to the set. Has no effect if the item already exists.
@@ -40,6 +48,13 @@ func (r Set[T]) Merge(s Set[T]) {
 	}
 }
 
+// Iterate through all items, call the delegate function on each
+func (r Set[T]) ForEach(f func(item T)) {
+	for k := range r.storage {
+		f(k)
+	}
+}
+
 // Creates a new set from all items in this one and the one specified. It is
 // non-destructive to both sets involved.
 func (r Set[T]) Union(s Set[T]) Set[T] {
@@ -52,7 +67,7 @@ func (r Set[T]) Union(s Set[T]) Set[T] {
 	for k := range s.storage {
 		newSet.Add(k)
 	}
-	
+
 	return newSet
 }
 
@@ -60,11 +75,11 @@ func (r Set[T]) Union(s Set[T]) Set[T] {
 // non-destructive to both sets involved.
 func (r Set[T]) Intersection(s Set[T]) Set[T] {
 	newSet := New[T]()
-	
+
 	var shorterSet *Set[T]
 	var longerSet *Set[T]
 
-	if (r.Size() > s.Size()) {
+	if r.Size() > s.Size() {
 		shorterSet = &s
 		longerSet = &r
 	} else {
@@ -77,7 +92,7 @@ func (r Set[T]) Intersection(s Set[T]) Set[T] {
 			newSet.Add(k)
 		}
 	}
-	
+
 	return newSet
 }
 
@@ -93,6 +108,6 @@ func (r Set[T]) Difference(s Set[T]) Set[T] {
 	for k := range s.storage {
 		newSet.Remove(k)
 	}
-	
+
 	return newSet
 }
