@@ -1,7 +1,7 @@
 package set
 
 import (
-	"github.com/jeffschoner/generic-data-structures/collection"
+	generics "github.com/jeffschoner/generic-data-structures"
 )
 
 type Set[T comparable] struct {
@@ -16,7 +16,7 @@ func New[T comparable]() Set[T] {
 	}
 }
 
-func NewCollection[T comparable]() collection.Collection[T] {
+func NewCollection[T comparable]() generics.Collection[T] {
 	return New[T]()
 }
 

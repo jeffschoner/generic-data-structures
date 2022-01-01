@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/jeffschoner/generic-data-structures/collection"
+	generics "github.com/jeffschoner/generic-data-structures"
 )
 
-func Map[TIn any, TOut any](input collection.Collection[TIn], init collection.CollectionInit[TOut], f func(item TIn) TOut) collection.Collection[TOut] {
+func Map[TIn any, TOut any](input generics.Collection[TIn], init generics.CollectionInit[TOut], f func(item TIn) TOut) generics.Collection[TOut] {
 	result := init()
 	input.ForEach(func(item TIn) {
 		out := f(item)

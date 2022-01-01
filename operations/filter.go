@@ -1,10 +1,10 @@
 package operations
 
 import (
-	"github.com/jeffschoner/generic-data-structures/collection"
+	generics "github.com/jeffschoner/generic-data-structures"
 )
 
-func Filter[T any](input collection.Collection[T], f func(item T) bool, init collection.CollectionInit[T]) collection.Collection[T] {
+func Filter[T any](input generics.Collection[T], f func(item T) bool, init generics.CollectionInit[T]) generics.Collection[T] {
 	result := init()
 	input.ForEach(func(item T) {
 		if f(item) {

@@ -3,7 +3,7 @@ package linkedlist
 import (
 	"errors"
 
-	"github.com/jeffschoner/generic-data-structures/collection"
+	generics "github.com/jeffschoner/generic-data-structures"
 )
 
 type List[T any] struct {
@@ -15,7 +15,7 @@ func New[T any]() *List[T] {
 	return &List[T]{}
 }
 
-func NewCollection[T any]() collection.Collection[T] {
+func NewCollection[T any]() generics.Collection[T] {
 	return New[T]()
 }
 
