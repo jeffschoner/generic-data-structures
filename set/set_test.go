@@ -9,6 +9,7 @@ import (
 func TestEmptyInt(t *testing.T) {
 	s := New[int]()
 	assert.Equal(t, 0, s.Size())
+	assert.True(t, s.IsEmpty())
 }
 
 func TestAddInt(t *testing.T) {
@@ -20,6 +21,7 @@ func TestAddInt(t *testing.T) {
 	assert.True(t, s.Contains(23))
 	assert.True(t, s.Contains(-22))
 	assert.True(t, s.Contains(0))
+	assert.False(t, s.IsEmpty())
 }
 
 func TestAddDupeInt(t *testing.T) {

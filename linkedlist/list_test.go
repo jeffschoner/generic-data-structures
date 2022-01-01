@@ -8,36 +8,36 @@ import (
 
 func TestEmpty(t *testing.T) {
 	l := New[int]()
-	assert.True(t, l.Empty())
+	assert.True(t, l.IsEmpty())
 }
 
 func TestAppendNotEmpty(t *testing.T) {
 	l := New[int]()
 	l.Append(23)
-	assert.False(t, l.Empty())
+	assert.False(t, l.IsEmpty())
 }
 
 func TestPrependNotEmpty(t *testing.T) {
 	l := New[int]()
 	l.Prepend(23)
-	assert.False(t, l.Empty())
+	assert.False(t, l.IsEmpty())
 }
 
 func TestRemoveFirstToEmpty(t *testing.T) {
 	l := New[int]()
 	l.Append(23)
 	l.Append(50)
-	assert.False(t, l.Empty())
+	assert.False(t, l.IsEmpty())
 
 	removed, err := l.RemoveFirst()
 	assert.NoError(t, err)
 	assert.Equal(t, 23, removed)
-	assert.False(t, l.Empty())
+	assert.False(t, l.IsEmpty())
 
 	removed, err = l.RemoveFirst()
 	assert.NoError(t, err)
 	assert.Equal(t, 50, removed)
-	assert.True(t, l.Empty())
+	assert.True(t, l.IsEmpty())
 
 	_, err = l.RemoveFirst()
 	assert.Error(t, err)
@@ -47,17 +47,17 @@ func TestRemoveLastToEmpty(t *testing.T) {
 	l := New[int]()
 	l.Append(23)
 	l.Append(50)
-	assert.False(t, l.Empty())
+	assert.False(t, l.IsEmpty())
 
 	removed, err := l.RemoveLast()
 	assert.NoError(t, err)
 	assert.Equal(t, 50, removed)
-	assert.False(t, l.Empty())
+	assert.False(t, l.IsEmpty())
 
 	removed, err = l.RemoveLast()
 	assert.NoError(t, err)
 	assert.Equal(t, 23, removed)
-	assert.True(t, l.Empty())
+	assert.True(t, l.IsEmpty())
 
 	_, err = l.RemoveLast()
 	assert.Error(t, err)

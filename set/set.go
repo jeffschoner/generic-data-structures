@@ -25,6 +25,11 @@ func (r Set[T]) Add(item T) {
 	r.storage[item] = struct{}{}
 }
 
+// Determine if the set is empty
+func (r Set[T]) IsEmpty() bool {
+	return len(r.storage) == 0
+}
+
 // Returns true if the set contains the specified item.
 func (r Set[T]) Contains(item T) bool {
 	_, has := r.storage[item]

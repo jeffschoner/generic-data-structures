@@ -67,7 +67,7 @@ func (l List[T]) ForEach(f func(item T)) {
 	}
 }
 
-func (l List[T]) Empty() bool {
+func (l List[T]) IsEmpty() bool {
 	return l.Head == nil
 }
 
