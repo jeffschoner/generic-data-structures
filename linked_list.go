@@ -7,6 +7,8 @@ import (
 type LinkedList[T any] struct {
 	Head *linkedListNode[T]
 	Tail *linkedListNode[T]
+
+	size int
 }
 
 func NewLinkedList[T any]() *LinkedList[T] {
@@ -41,6 +43,8 @@ func (l *LinkedList[T]) Append(item T) {
 		}
 		l.Tail = l.Tail.Next
 	}
+
+	l.size++
 }
 
 func (l *LinkedList[T]) Add(item T) {
@@ -63,6 +67,8 @@ func (l *LinkedList[T]) Prepend(item T) {
 		}
 		l.Head = l.Head.Previous
 	}
+
+	l.size++
 }
 
 func (l LinkedList[T]) ForEach(f func(item T)) {
@@ -75,11 +81,17 @@ func (l LinkedList[T]) IsEmpty() bool {
 	return l.Head == nil
 }
 
+func (l LinkedList[T]) Size() int {
+	return l.size
+}
+
 func (l *LinkedList[T]) RemoveLast() (T, error) {
 	if l.Tail == nil {
 		var defaultValue T
 		return defaultValue, EmptyError
 	}
+
+	l.size--
 
 	toReturn := l.Tail.Datum
 
@@ -98,6 +110,8 @@ func (l *LinkedList[T]) RemoveFirst() (T, error) {
 		var defaultValue T
 		return defaultValue, EmptyError
 	}
+
+	l.size--
 
 	toReturn := l.Head.Datum
 
