@@ -5,8 +5,8 @@ import (
 )
 
 type LinkedList[T any] struct {
-	Head *linkedListNode[T]
-	Tail *linkedListNode[T]
+	head *linkedListNode[T]
+	tail *linkedListNode[T]
 
 	size int
 }
@@ -28,20 +28,20 @@ type linkedListNode[T any] struct {
 }
 
 func (l *LinkedList[T]) Append(item T) {
-	if l.Tail == nil {
-		l.Tail = &linkedListNode[T]{
+	if l.tail == nil {
+		l.tail = &linkedListNode[T]{
 			Datum:    item,
 			Previous: nil,
 			Next:     nil,
 		}
-		l.Head = l.Tail
+		l.head = l.tail
 	} else {
-		l.Tail.Next = &linkedListNode[T]{
+		l.tail.Next = &linkedListNode[T]{
 			Datum:    item,
-			Previous: l.Tail,
+			Previous: l.tail,
 			Next:     nil,
 		}
-		l.Tail = l.Tail.Next
+		l.tail = l.tail.Next
 	}
 
 	l.size++
@@ -52,33 +52,33 @@ func (l *LinkedList[T]) Add(item T) {
 }
 
 func (l *LinkedList[T]) Prepend(item T) {
-	if l.Head == nil {
-		l.Head = &linkedListNode[T]{
+	if l.head == nil {
+		l.head = &linkedListNode[T]{
 			Datum:    item,
 			Previous: nil,
 			Next:     nil,
 		}
-		l.Tail = l.Head
+		l.tail = l.head
 	} else {
-		l.Head.Previous = &linkedListNode[T]{
+		l.head.Previous = &linkedListNode[T]{
 			Datum:    item,
 			Previous: nil,
-			Next:     l.Head,
+			Next:     l.head,
 		}
-		l.Head = l.Head.Previous
+		l.head = l.head.Previous
 	}
 
 	l.size++
 }
 
 func (l LinkedList[T]) ForEach(f func(item T)) {
-	for node := l.Head; node != nil; node = node.Next {
+	for node := l.head; node != nil; node = node.Next {
 		f(node.Datum)
 	}
 }
 
 func (l LinkedList[T]) IsEmpty() bool {
-	return l.Head == nil
+	return l.head == nil
 }
 
 func (l LinkedList[T]) Size() int {
@@ -86,40 +86,40 @@ func (l LinkedList[T]) Size() int {
 }
 
 func (l *LinkedList[T]) RemoveLast() (T, error) {
-	if l.Tail == nil {
+	if l.tail == nil {
 		var defaultValue T
 		return defaultValue, EmptyError
 	}
 
 	l.size--
 
-	toReturn := l.Tail.Datum
+	toReturn := l.tail.Datum
 
-	l.Tail = l.Tail.Previous
-	if l.Tail == nil {
-		l.Head = nil
+	l.tail = l.tail.Previous
+	if l.tail == nil {
+		l.head = nil
 	} else {
-		l.Tail.Next = nil
+		l.tail.Next = nil
 	}
 
 	return toReturn, nil
 }
 
 func (l *LinkedList[T]) RemoveFirst() (T, error) {
-	if l.Head == nil {
+	if l.head == nil {
 		var defaultValue T
 		return defaultValue, EmptyError
 	}
 
 	l.size--
 
-	toReturn := l.Head.Datum
+	toReturn := l.head.Datum
 
-	l.Head = l.Head.Next
-	if l.Head == nil {
-		l.Tail = nil
+	l.head = l.head.Next
+	if l.head == nil {
+		l.tail = nil
 	} else {
-		l.Head.Previous = nil
+		l.head.Previous = nil
 	}
 
 	return toReturn, nil
