@@ -5,8 +5,8 @@ import (
 )
 
 type LinkedList[T any] struct {
-	Head *node[T]
-	Tail *node[T]
+	Head *linkedListNode[T]
+	Tail *linkedListNode[T]
 }
 
 func NewLinkedList[T any]() *LinkedList[T] {
@@ -19,16 +19,22 @@ func NewListCollection[T any]() Collection[T] {
 
 var EmptyError = errors.New("List is empty")
 
+type linkedListNode[T any] struct {
+	Datum    T
+	Previous *linkedListNode[T]
+	Next     *linkedListNode[T]
+}
+
 func (l *LinkedList[T]) Append(item T) {
 	if l.Tail == nil {
-		l.Tail = &node[T]{
+		l.Tail = &linkedListNode[T]{
 			Datum:    item,
 			Previous: nil,
 			Next:     nil,
 		}
 		l.Head = l.Tail
 	} else {
-		l.Tail.Next = &node[T]{
+		l.Tail.Next = &linkedListNode[T]{
 			Datum:    item,
 			Previous: l.Tail,
 			Next:     nil,
@@ -43,14 +49,14 @@ func (l *LinkedList[T]) Add(item T) {
 
 func (l *LinkedList[T]) Prepend(item T) {
 	if l.Head == nil {
-		l.Head = &node[T]{
+		l.Head = &linkedListNode[T]{
 			Datum:    item,
 			Previous: nil,
 			Next:     nil,
 		}
 		l.Tail = l.Head
 	} else {
-		l.Head.Previous = &node[T]{
+		l.Head.Previous = &linkedListNode[T]{
 			Datum:    item,
 			Previous: nil,
 			Next:     l.Head,
