@@ -1,4 +1,4 @@
-package generics
+package genericsds
 
 type Collection[T any] interface {
 	ForEach(f func(item T))

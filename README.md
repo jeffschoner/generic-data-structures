@@ -2,6 +2,10 @@
 
 This repo is a playground for learning about the Go generics available in the 1.18 preview.
 
-- `linkedlist`: A linked list implementation for data of any type
-- `operations`: High-level operations to perform on generic data structures like map, filter
-- `set`: A set implementation for any comparable
+## Data Structures
+- `LinkedList`: A linked list implementation for data of any type
+- `Set`: A set implementation for any comparable
+
+## Operations
+- `Map`: tranform one `Collection` to another, item by item
+- `FlatMap`: tranform one `Collection` to another, item by item, but with 0 to _n_ output items

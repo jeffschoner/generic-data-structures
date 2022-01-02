@@ -1,8 +1,4 @@
-package set
-
-import (
-	generics "github.com/jeffschoner/generic-data-structures"
-)
+package genericsds
 
 type Set[T comparable] struct {
 	storage map[T]struct{}
@@ -10,14 +6,14 @@ type Set[T comparable] struct {
 
 // Create a new generic-typed set. T must be comparable. You need to use this function
 // to create new sets. Set[int]{} will not work.
-func New[T comparable]() Set[T] {
+func NewSet[T comparable]() Set[T] {
 	return Set[T]{
 		storage: make(map[T]struct{}),
 	}
 }
 
-func NewCollection[T comparable]() generics.Collection[T] {
-	return New[T]()
+func NewSetCollection[T comparable]() Collection[T] {
+	return NewSet[T]()
 }
 
 // Add an item to the set. Has no effect if the item already exists.
@@ -63,7 +59,7 @@ func (r Set[T]) ForEach(f func(item T)) {
 // Creates a new set from all items in this one and the one specified. It is
 // non-destructive to both sets involved.
 func (r Set[T]) Union(s Set[T]) Set[T] {
-	newSet := New[T]()
+	newSet := NewSet[T]()
 
 	for k := range r.storage {
 		newSet.Add(k)
@@ -79,7 +75,7 @@ func (r Set[T]) Union(s Set[T]) Set[T] {
 // Creates a new set with all items common to this one and the one specified. It is
 // non-destructive to both sets involved.
 func (r Set[T]) Intersection(s Set[T]) Set[T] {
-	newSet := New[T]()
+	newSet := NewSet[T]()
 
 	var shorterSet *Set[T]
 	var longerSet *Set[T]
@@ -104,7 +100,7 @@ func (r Set[T]) Intersection(s Set[T]) Set[T] {
 // Creates a new set with the items in this one less any of the items in the specified
 // set. It is non-destructive to both sets involved.
 func (r Set[T]) Difference(s Set[T]) Set[T] {
-	newSet := New[T]()
+	newSet := NewSet[T]()
 
 	for k := range r.storage {
 		newSet.Add(k)

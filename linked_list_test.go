@@ -1,4 +1,4 @@
-package linkedlist
+package genericsds
 
 import (
 	"testing"
@@ -7,24 +7,24 @@ import (
 )
 
 func TestEmpty(t *testing.T) {
-	l := New[int]()
+	l := NewLinkedList[int]()
 	assert.True(t, l.IsEmpty())
 }
 
 func TestAppendNotEmpty(t *testing.T) {
-	l := New[int]()
+	l := NewLinkedList[int]()
 	l.Append(23)
 	assert.False(t, l.IsEmpty())
 }
 
 func TestPrependNotEmpty(t *testing.T) {
-	l := New[int]()
+	l := NewLinkedList[int]()
 	l.Prepend(23)
 	assert.False(t, l.IsEmpty())
 }
 
 func TestRemoveFirstToEmpty(t *testing.T) {
-	l := New[int]()
+	l := NewLinkedList[int]()
 	l.Append(23)
 	l.Append(50)
 	assert.False(t, l.IsEmpty())
@@ -44,7 +44,7 @@ func TestRemoveFirstToEmpty(t *testing.T) {
 }
 
 func TestRemoveLastToEmpty(t *testing.T) {
-	l := New[int]()
+	l := NewLinkedList[int]()
 	l.Append(23)
 	l.Append(50)
 	assert.False(t, l.IsEmpty())
@@ -64,7 +64,7 @@ func TestRemoveLastToEmpty(t *testing.T) {
 }
 
 func TestForEach(t *testing.T) {
-	l := New[string]()
+	l := NewLinkedList[string]()
 	l.Append("foo")
 	l.Prepend("bar")
 	l.Append("baz")

@@ -1,4 +1,4 @@
-module github.com/jeffschoner/generic-data-structures
+module github.com/jeffschoner/genericsds
 
 go 1.18
 

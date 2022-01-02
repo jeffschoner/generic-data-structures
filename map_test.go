@@ -1,18 +1,16 @@
-package operations
+package genericsds
 
 import (
 	"strconv"
 	"testing"
 
-	"github.com/jeffschoner/generic-data-structures/linkedlist"
-	"github.com/jeffschoner/generic-data-structures/set"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestMapEmpty(t *testing.T) {
-	l := linkedlist.New[int]()
+	l := NewLinkedList[int]()
 
-	lOut := Map[int](l, linkedlist.NewCollection[int], func(item int) int {
+	lOut := Map[int](l, NewListCollection[int], func(item int) int {
 		return item * item
 	})
 
@@ -24,12 +22,12 @@ func TestMapEmpty(t *testing.T) {
 }
 
 func TestMapList(t *testing.T) {
-	l := linkedlist.New[int]()
+	l := NewLinkedList[int]()
 	l.Add(1)
 	l.Add(2)
 	l.Add(3)
 
-	lOut := Map[int](l, linkedlist.NewCollection[int], func(item int) int {
+	lOut := Map[int](l, NewListCollection[int], func(item int) int {
 		return item * item
 	})
 
@@ -41,12 +39,12 @@ func TestMapList(t *testing.T) {
 }
 
 func TestMapSet(t *testing.T) {
-	s := set.New[int]()
+	s := NewSet[int]()
 	s.Add(1)
 	s.Add(2)
 	s.Add(3)
 
-	sOut := Map[int](s, set.NewCollection[string], func(item int) string {
+	sOut := Map[int](s, NewSetCollection[string], func(item int) string {
 		return strconv.Itoa(item)
 	})
 

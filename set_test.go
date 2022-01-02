@@ -1,4 +1,4 @@
-package set
+package genericsds
 
 import (
 	"testing"
@@ -7,13 +7,13 @@ import (
 )
 
 func TestEmptyInt(t *testing.T) {
-	s := New[int]()
+	s := NewSet[int]()
 	assert.Equal(t, 0, s.Size())
 	assert.True(t, s.IsEmpty())
 }
 
 func TestAddInt(t *testing.T) {
-	s := New[int]()
+	s := NewSet[int]()
 	s.Add(23)
 	s.Add(-22)
 	s.Add(0)
@@ -25,7 +25,7 @@ func TestAddInt(t *testing.T) {
 }
 
 func TestAddDupeInt(t *testing.T) {
-	s := New[int]()
+	s := NewSet[int]()
 	s.Add(23)
 	s.Add(0)
 	s.Add(23)
@@ -35,7 +35,7 @@ func TestAddDupeInt(t *testing.T) {
 }
 
 func TestRemoveInt(t *testing.T) {
-	s := New[int]()
+	s := NewSet[int]()
 	s.Add(23)
 	s.Add(-22)
 	s.Add(0)
@@ -46,7 +46,7 @@ func TestRemoveInt(t *testing.T) {
 }
 
 func TestRemoveUnknownInt(t *testing.T) {
-	s := New[int]()
+	s := NewSet[int]()
 	s.Add(23)
 	s.Remove(12)
 	assert.Equal(t, 1, s.Size())
@@ -55,7 +55,7 @@ func TestRemoveUnknownInt(t *testing.T) {
 }
 
 func TestString(t *testing.T) {
-	s := New[string]()
+	s := NewSet[string]()
 	s.Add("hello")
 	s.Add("foo")
 	assert.Equal(t, 2, s.Size())
@@ -68,11 +68,11 @@ func TestString(t *testing.T) {
 }
 
 func TestMerge(t *testing.T) {
-	s1 := New[string]()
+	s1 := NewSet[string]()
 	s1.Add("hi")
 	s1.Add("foo")
 
-	s2 := New[string]()
+	s2 := NewSet[string]()
 	s2.Add("bar")
 	s2.Add("hi")
 	s2.Add("baz")
@@ -89,11 +89,11 @@ func TestMerge(t *testing.T) {
 }
 
 func TestUnion(t *testing.T) {
-	s1 := New[string]()
+	s1 := NewSet[string]()
 	s1.Add("hi")
 	s1.Add("foo")
 
-	s2 := New[string]()
+	s2 := NewSet[string]()
 	s2.Add("bar")
 	s2.Add("hi")
 	s2.Add("baz")
@@ -111,11 +111,11 @@ func TestUnion(t *testing.T) {
 }
 
 func TestIntersection(t *testing.T) {
-	s1 := New[string]()
+	s1 := NewSet[string]()
 	s1.Add("hi")
 	s1.Add("foo")
 
-	s2 := New[string]()
+	s2 := NewSet[string]()
 	s2.Add("bar")
 	s2.Add("hi")
 	s2.Add("baz")
@@ -130,12 +130,12 @@ func TestIntersection(t *testing.T) {
 }
 
 func TestIntersectionFlipLong(t *testing.T) {
-	s1 := New[string]()
+	s1 := NewSet[string]()
 	s1.Add("hi")
 	s1.Add("foo")
 	s1.Add("baz")
 
-	s2 := New[string]()
+	s2 := NewSet[string]()
 	s2.Add("bar")
 	s2.Add("hi")
 
@@ -149,11 +149,11 @@ func TestIntersectionFlipLong(t *testing.T) {
 }
 
 func TestDifference(t *testing.T) {
-	s1 := New[string]()
+	s1 := NewSet[string]()
 	s1.Add("hi")
 	s1.Add("foo")
 
-	s2 := New[string]()
+	s2 := NewSet[string]()
 	s2.Add("bar")
 	s2.Add("hi")
 	s2.Add("baz")

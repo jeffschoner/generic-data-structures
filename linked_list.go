@@ -1,27 +1,25 @@
-package linkedlist
+package genericsds
 
 import (
 	"errors"
-
-	generics "github.com/jeffschoner/generic-data-structures"
 )
 
-type List[T any] struct {
+type LinkedList[T any] struct {
 	Head *node[T]
 	Tail *node[T]
 }
 
-func New[T any]() *List[T] {
-	return &List[T]{}
+func NewLinkedList[T any]() *LinkedList[T] {
+	return &LinkedList[T]{}
 }
 
-func NewCollection[T any]() generics.Collection[T] {
-	return New[T]()
+func NewListCollection[T any]() Collection[T] {
+	return NewLinkedList[T]()
 }
 
 var EmptyError = errors.New("List is empty")
 
-func (l *List[T]) Append(item T) {
+func (l *LinkedList[T]) Append(item T) {
 	if l.Tail == nil {
 		l.Tail = &node[T]{
 			Datum:    item,
@@ -39,11 +37,11 @@ func (l *List[T]) Append(item T) {
 	}
 }
 
-func (l *List[T]) Add(item T) {
+func (l *LinkedList[T]) Add(item T) {
 	l.Append(item)
 }
 
-func (l *List[T]) Prepend(item T) {
+func (l *LinkedList[T]) Prepend(item T) {
 	if l.Head == nil {
 		l.Head = &node[T]{
 			Datum:    item,
@@ -61,17 +59,17 @@ func (l *List[T]) Prepend(item T) {
 	}
 }
 
-func (l List[T]) ForEach(f func(item T)) {
+func (l LinkedList[T]) ForEach(f func(item T)) {
 	for node := l.Head; node != nil; node = node.Next {
 		f(node.Datum)
 	}
 }
 
-func (l List[T]) IsEmpty() bool {
+func (l LinkedList[T]) IsEmpty() bool {
 	return l.Head == nil
 }
 
-func (l *List[T]) RemoveLast() (T, error) {
+func (l *LinkedList[T]) RemoveLast() (T, error) {
 	if l.Tail == nil {
 		var defaultValue T
 		return defaultValue, EmptyError
@@ -89,7 +87,7 @@ func (l *List[T]) RemoveLast() (T, error) {
 	return toReturn, nil
 }
 
-func (l *List[T]) RemoveFirst() (T, error) {
+func (l *LinkedList[T]) RemoveFirst() (T, error) {
 	if l.Head == nil {
 		var defaultValue T
 		return defaultValue, EmptyError

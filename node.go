@@ -1,4 +1,4 @@
-package linkedlist
+package genericsds
 
 type node[T any] struct {
 	Datum    T
